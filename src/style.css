@@ -18,6 +18,5 @@ body {
 @media (max-width: 480px) {
   #app {
     width: 100%; /* Set width to 100% to occupy full width of the screen */
-    padding: 10px; 
   }
 }
