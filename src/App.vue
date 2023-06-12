@@ -7,7 +7,7 @@
           :asset="asset"
           v-bind:qrbox="250"
           v-bind:fps="10"
-          style="width: 500px"
+          style="width: 100%"
           @result="onScan"
         />
       </div>
