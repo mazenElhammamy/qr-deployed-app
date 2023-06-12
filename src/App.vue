@@ -2,7 +2,7 @@
   <div id="app">
     <div v-if="!closeLocationScanner">
       <h1>scan Location</h1>
-      <div class="section" style="width: 500px; margin: auto">
+      <div class="section">
         <QRScanner
           :asset="asset"
           v-bind:qrbox="250"
