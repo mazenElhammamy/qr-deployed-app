@@ -32,6 +32,7 @@ onMounted(() => {
   const config = {
     fps: fps,
     qrbox: qrbox,
+    preferredCameraFacingMode: "environment",
   };
 
   html5QrcodeScanner = new Html5QrcodeScanner(
