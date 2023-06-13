@@ -10,7 +10,7 @@ const props = defineProps({
   asset: Boolean,
 });
 const { asset } = toRefs(props);
-const qrbox = 250; // Set the size of the QR code scanning region
+const qrbox = 350; // Set the size of the QR code scanning region
 const fps = 1; // Set the desired frames per second
 const emit = defineEmits(["result"]);
 let html5QrcodeScanner: Html5QrcodeScanner | null;
