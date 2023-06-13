@@ -4,7 +4,11 @@
 
 <script setup lang="ts">
 import { onMounted, toRefs } from "vue";
-import { Html5QrcodeResult, Html5QrcodeScanner } from "html5-qrcode";
+import {
+  Html5QrcodeResult,
+  Html5QrcodeScanner,
+  Html5Qrcode,
+} from "html5-qrcode";
 
 const props = defineProps({
   isScanningAssets: Boolean,
@@ -14,12 +18,16 @@ const qrbox = 350; // Set the size of the QR code scanning region
 const fps = 1; // Set the desired frames per second
 const emit = defineEmits(["result"]);
 let html5QrcodeScanner: Html5QrcodeScanner | null;
+// let html5Qrcode: Html5Qrcode | null;
 
 const onScanSuccess = (
   decodedText: string,
   decodedResult: Html5QrcodeResult
 ) => {
   // Handle the scanned QR code result
+  // Html5Qrcode.getCameras().then((devices) => {
+  //   console.log(devices);
+  // });
   emit("result", decodedText, decodedResult);
   console.log("asset", isScanningAssets.value);
 
@@ -32,7 +40,8 @@ onMounted(() => {
   const config = {
     fps: fps,
     qrbox: qrbox,
-    facingMode: { exact: "environment" },
+    facingMode: "environment",
+    legacyMode: false,
   };
 
   html5QrcodeScanner = new Html5QrcodeScanner(
