@@ -4,7 +4,7 @@
       <h1>scan Location</h1>
       <div class="section">
         <QRScanner
-          :asset="asset"
+          :isScanningAssets="isScanningAssets"
           v-bind:qrbox="250"
           v-bind:fps="10"
           style="width: 100%"
@@ -15,12 +15,16 @@
 
     <div v-else>
       <h3>Scaned Location: {{ location }}</h3>
-      <button v-if="!asset" @click="openSanner">Scan assets</button>
+      <button v-if="!isScanningAssets" @click="openSanner">Scan assets</button>
     </div>
     <div>
-      <div v-if="asset" class="section" style="width: 500px; margin: auto">
+      <div
+        v-if="isScanningAssets"
+        class="section"
+        style="width: 500px; margin: auto"
+      >
         <QRScanner
-          :asset="asset"
+          :isScanningAssets="isScanningAssets"
           v-bind:qrbox="250"
           v-bind:fps="10"
           style="width: 500px"
@@ -40,13 +44,13 @@ import { Html5QrcodeResult } from "html5-qrcode";
 import QRScanner from "./components/QRCodeScanner.vue";
 import { ref } from "vue";
 
-const asset = ref(false);
+const isScanningAssets = ref(false);
 const location = ref<string>("");
 const assets = ref<string[]>([]);
 const closeLocationScanner = ref(false);
 
 function onScan(decodedText: string, decodedResult: Html5QrcodeResult) {
-  if (!asset.value) {
+  if (!isScanningAssets.value) {
     location.value = decodedText;
     closeLocationScanner.value = true;
   } else {
@@ -56,6 +60,6 @@ function onScan(decodedText: string, decodedResult: Html5QrcodeResult) {
 }
 
 function openSanner() {
-  asset.value = true;
+  isScanningAssets.value = true;
 }
 </script>

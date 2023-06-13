@@ -7,9 +7,9 @@ import { onMounted, toRefs } from "vue";
 import { Html5QrcodeResult, Html5QrcodeScanner } from "html5-qrcode";
 
 const props = defineProps({
-  asset: Boolean,
+  isScanningAssets: Boolean,
 });
-const { asset } = toRefs(props);
+const { isScanningAssets } = toRefs(props);
 const qrbox = 350; // Set the size of the QR code scanning region
 const fps = 1; // Set the desired frames per second
 const emit = defineEmits(["result"]);
@@ -21,9 +21,9 @@ const onScanSuccess = (
 ) => {
   // Handle the scanned QR code result
   emit("result", decodedText, decodedResult);
-  console.log("asset", asset.value);
+  console.log("asset", isScanningAssets.value);
 
-  if (!props.asset) {
+  if (!isScanningAssets) {
     html5QrcodeScanner?.clear();
   }
 };
