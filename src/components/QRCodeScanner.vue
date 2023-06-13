@@ -29,10 +29,31 @@ const onScanSuccess = (
 };
 
 onMounted(() => {
+  const getUserMediaConstraints = async () => {
+    const devices = await navigator.mediaDevices.enumerateDevices();
+    const backCamera = devices.find(
+      (device) =>
+        device.kind === "videoinput" &&
+        device.label.toLowerCase().includes("back")
+    );
+    if (backCamera) {
+      return {
+        audio: false,
+        video: {
+          deviceId: { exact: backCamera.deviceId },
+        },
+      };
+    }
+    return {
+      audio: false,
+      video: true,
+    };
+  };
+
   const config = {
     fps: fps,
     qrbox: qrbox,
-    preferredCameraFacingMode: "environment",
+    getUserMediaConstraints: getUserMediaConstraints,
   };
 
   html5QrcodeScanner = new Html5QrcodeScanner(
