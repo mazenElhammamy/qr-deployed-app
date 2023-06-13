@@ -30,7 +30,7 @@ onMounted(() => {
   const config = {
     fps: fps,
     qrbox: qrbox,
-    facingMode: "environment",
+    videoConstraints: { facingMode: { exact: "environment" } },
     legacyMode: false,
   };
 
